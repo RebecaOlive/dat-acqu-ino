@@ -10,6 +10,11 @@ const SERVIDOR_PORTA = 3300;
 // habilita ou desabilita a inserção de dados no banco de dados
 const HABILITAR_OPERACAO_INSERIR = false;
 
+const VALORES_ARDUINO_UNO = {
+    vendorId: '1a86',
+    productId: '7523'
+}
+
 // função para comunicação serial
 const serial = async (
     valoresSensorAnalogico,
@@ -29,7 +34,7 @@ const serial = async (
 
     // lista as portas seriais disponíveis e procura pelo Arduino
     const portas = await serialport.SerialPort.list();
-    const portaArduino = portas.find((porta) => porta.vendorId == 2341 && porta.productId == 43);
+    const portaArduino = portas.find((porta) => porta.vendorId == VALORES_ARDUINO_UNO.vendorId && porta.productId == VALORES_ARDUINO_UNO.productId);
     if (!portaArduino) {
         throw new Error('O arduino não foi encontrado em nenhuma porta serial');
     }
